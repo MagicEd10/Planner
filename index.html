@@ -6,38 +6,22 @@
 <title>Мой планировщик</title>
 <style>
 :root {
-  --bg: #0f0f11;
-  --surface: #17171a;
-  --surface2: #1e1e23;
-  --surface3: #26262d;
-  --border: rgba(255,255,255,0.07);
-  --border2: rgba(255,255,255,0.13);
-  --text: #f0f0f0;
-  --text2: #888;
-  --text3: #4a4a55;
-  --accent: #7f77dd;
-  --accent2: #534ab7;
-  --accent-soft: rgba(127,119,221,0.13);
-  --green: #1d9e75;
-  --green-soft: rgba(29,158,117,0.13);
-  --amber: #ef9f27;
-  --amber-soft: rgba(239,159,39,0.13);
-  --coral: #d85a30;
-  --coral-soft: rgba(216,90,48,0.13);
-  --blue: #378add;
-  --blue-soft: rgba(55,138,221,0.13);
-  --pink: #d4537e;
-  --pink-soft: rgba(212,83,126,0.13);
-  --teal: #1d9e75;
-  --r: 12px;
-  --rs: 8px;
+  --bg:#0f0f11;--surface:#17171a;--surface2:#1e1e23;--surface3:#26262d;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);
+  --text:#f0f0f0;--text2:#888;--text3:#4a4a55;
+  --accent:#7f77dd;--accent2:#534ab7;--accent-soft:rgba(127,119,221,0.13);
+  --green:#1d9e75;--green-soft:rgba(29,158,117,0.13);
+  --amber:#ef9f27;--amber-soft:rgba(239,159,39,0.13);
+  --coral:#d85a30;--coral-soft:rgba(216,90,48,0.13);
+  --blue:#378add;--blue-soft:rgba(55,138,221,0.13);
+  --pink:#d4537e;--pink-soft:rgba(212,83,126,0.13);
+  --r:12px;--rs:8px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh}
 
-nav{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;border-bottom:1px solid var(--border);background:var(--surface);position:sticky;top:0;z-index:100;gap:1rem;flex-wrap:wrap}
+nav{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.5rem;border-bottom:1px solid var(--border);background:var(--surface);position:sticky;top:0;z-index:100;gap:.75rem;flex-wrap:wrap}
 .nav-title{font-size:15px;font-weight:600;letter-spacing:-.3px;white-space:nowrap}
-.nav-date{font-size:12px;color:var(--text2);white-space:nowrap}
 .nav-tabs{display:flex;gap:3px;flex-wrap:wrap}
 .tab{padding:6px 13px;border-radius:20px;font-size:13px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--text2);transition:all .15s}
 .tab.active{background:var(--accent);color:#fff}
@@ -45,15 +29,22 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:.85rem
 
 .page{display:none;padding:1.25rem 1.5rem;max-width:960px;margin:0 auto}
 .page.active{display:block}
-
 .slabel{font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--text3);margin-bottom:.65rem}
-
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1rem 1.25rem;margin-bottom:1rem}
 .card-title{font-size:12px;font-weight:700;color:var(--text2);margin-bottom:.75rem;display:flex;align-items:center;gap:6px;letter-spacing:.04em;text-transform:uppercase}
 .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
 
+/* DAY NAV */
+.day-nav{display:flex;align-items:center;gap:10px;margin-bottom:1.1rem}
+.day-nav-btn{background:var(--surface2);border:1px solid var(--border);border-radius:var(--rs);padding:6px 13px;color:var(--text);font-size:14px;cursor:pointer;transition:all .15s;line-height:1}
+.day-nav-btn:hover{border-color:var(--border2)}
+.day-nav-btn:disabled{opacity:.3;cursor:default}
+.day-nav-label{flex:1;text-align:center;font-size:14px;font-weight:600;color:var(--text)}
+.day-nav-sub{font-size:11px;color:var(--text3);font-weight:400;margin-left:6px}
+.today-badge{font-size:11px;padding:2px 8px;border-radius:10px;background:var(--accent-soft);color:var(--accent);margin-left:6px;font-weight:600}
+
 /* STATUS CHIPS */
-.status-chip{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:1.5px solid transparent;transition:all .12s}
+.sc{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:1.5px solid transparent;transition:all .12s}
 .sc-work{background:var(--accent-soft);color:var(--accent);border-color:rgba(127,119,221,.25)}
 .sc-sport{background:var(--green-soft);color:var(--green);border-color:rgba(29,158,117,.25)}
 .sc-meeting{background:var(--blue-soft);color:var(--blue);border-color:rgba(55,138,221,.25)}
@@ -65,8 +56,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:.85rem
 
 /* TIME BLOCKS */
 .time-blocks{display:flex;flex-direction:column;gap:5px}
-.tblock{display:flex;align-items:flex-start;gap:10px;padding:9px 12px;border-radius:var(--rs);border:1px solid var(--border);background:var(--surface2);transition:all .15s;position:relative}
-.tblock:hover{border-color:var(--border2)}
+.tblock{display:flex;align-items:flex-start;gap:10px;padding:9px 12px;border-radius:var(--rs);border:1px solid var(--border);background:var(--surface2);transition:all .15s}
 .tblock.type-work{border-left:3px solid var(--accent)}
 .tblock.type-sport{border-left:3px solid var(--green)}
 .tblock.type-meeting{border-left:3px solid var(--blue)}
@@ -85,9 +75,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:.85rem
 
 /* TASKS */
 .task-list{display:flex;flex-direction:column;gap:5px}
-.task-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--rs);border:1px solid var(--border);background:var(--surface2);cursor:grab}
-.task-item.dragging{opacity:.4;cursor:grabbing}
-.task-item.drag-over{border-color:var(--accent)}
+.task-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--rs);border:1px solid var(--border);background:var(--surface2)}
 .task-item.done .task-text{text-decoration:line-through;color:var(--text3)}
 .tchk{width:16px;height:16px;border-radius:4px;border:1.5px solid var(--border2);cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s}
 .tchk.on{background:var(--accent);border-color:var(--accent)}
@@ -101,11 +89,8 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:.85rem
 .add-input{flex:1;min-width:140px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--rs);padding:8px 12px;font-size:13px;color:var(--text);outline:none}
 .add-input:focus{border-color:var(--accent)}
 .add-input::placeholder{color:var(--text3)}
-.add-btn{padding:8px 14px;background:var(--accent);border:none;border-radius:var(--rs);color:#fff;font-size:13px;font-weight:600;cursor:pointer;transition:background .15s}
+.add-btn{padding:8px 14px;background:var(--accent);border:none;border-radius:var(--rs);color:#fff;font-size:13px;font-weight:600;cursor:pointer}
 .add-btn:hover{background:var(--accent2)}
-
-/* STATUS SELECT */
-.status-select-wrap{position:relative}
 .status-select{background:var(--surface2);border:1px solid var(--border);border-radius:var(--rs);padding:8px 10px;font-size:12px;color:var(--text);outline:none;cursor:pointer;appearance:none;-webkit-appearance:none}
 .status-select:focus{border-color:var(--accent)}
 
@@ -113,6 +98,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:.85rem
 .notes-area{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--rs);padding:11px 12px;font-size:13px;color:var(--text);outline:none;resize:none;line-height:1.65;min-height:110px}
 .notes-area:focus{border-color:var(--accent)}
 .notes-area::placeholder{color:var(--text3)}
+.notes-area:disabled{opacity:.6;cursor:default}
 
 /* STATS */
 .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1rem}
@@ -122,16 +108,15 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:.85rem
 
 /* WEEK */
 .week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:1rem}
-@media(max-width:680px){.week-grid{grid-template-columns:repeat(3,1fr)}}
-.wday{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:10px 8px;min-height:160px;display:flex;flex-direction:column}
+@media(max-width:700px){.week-grid{grid-template-columns:repeat(3,1fr)}}
+.wday{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:10px 8px;min-height:150px;display:flex;flex-direction:column}
 .wday.today{border-color:var(--accent)}
 .wday-name{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;text-align:center;margin-bottom:3px}
 .wday-num{font-size:18px;font-weight:700;color:var(--text);text-align:center;margin-bottom:7px}
 .wday.today .wday-num{color:var(--accent)}
 .wday-tasks{display:flex;flex-direction:column;gap:3px;flex:1}
-.wpill{font-size:11px;padding:4px 7px;border-radius:5px;color:var(--text);border:1px solid var(--border);background:var(--surface2);cursor:pointer;line-height:1.3;word-break:break-word;display:flex;align-items:flex-start;gap:5px;transition:all .15s}
+.wpill{font-size:11px;padding:4px 7px;border-radius:5px;color:var(--text);border:1px solid var(--border);background:var(--surface2);cursor:pointer;line-height:1.3;word-break:break-word;display:flex;align-items:flex-start;gap:5px}
 .wpill.done{opacity:.4;text-decoration:line-through}
-.wpill:hover{border-color:var(--border2)}
 .wpill-chk{width:13px;height:13px;border-radius:3px;border:1.5px solid var(--border2);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .12s}
 .wpill-chk.on{background:var(--green);border-color:var(--green)}
 .wpill-chk.on::after{content:'✓';font-size:8px;color:#fff}
@@ -142,8 +127,13 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:.85rem
 .wpill.type-hobby{border-left:2.5px solid var(--pink)}
 .wpill.type-rest{border-left:2.5px solid var(--text3)}
 .wpill.type-food{border-left:2.5px solid var(--coral)}
-.wadd{margin-top:5px;width:100%;font-size:11px;color:var(--text3);background:none;border:1px dashed var(--border);border-radius:5px;padding:5px;cursor:pointer;transition:all .15s}
+.wadd{margin-top:5px;width:100%;font-size:11px;color:var(--text3);background:none;border:1px dashed var(--border);border-radius:5px;padding:5px;cursor:pointer}
 .wadd:hover{color:var(--text2);border-color:var(--border2)}
+
+/* WEEK NOTES */
+.week-note-item{padding:10px 14px;border-radius:var(--rs);border:1px solid var(--border);background:var(--surface2);margin-bottom:6px}
+.week-note-date{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.week-note-text{font-size:13px;color:var(--text2);line-height:1.55;white-space:pre-wrap}
 
 /* CALENDAR */
 .cal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
@@ -152,7 +142,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:.85rem
 .cal-month-title{font-size:16px;font-weight:600}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
 .cal-dow{font-size:10px;font-weight:700;color:var(--text3);text-align:center;padding-bottom:4px;text-transform:uppercase;letter-spacing:.05em}
-.cal-cell{background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);padding:7px 6px;min-height:90px;cursor:pointer;transition:all .15s;display:flex;flex-direction:column}
+.cal-cell{background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);padding:7px 6px;min-height:88px;cursor:pointer;display:flex;flex-direction:column;transition:border-color .15s}
 .cal-cell:hover{border-color:var(--border2)}
 .cal-cell.today{border-color:var(--accent)}
 .cal-cell.other-month{opacity:.3}
@@ -166,23 +156,21 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:.85rem
 .cal-more{font-size:10px;color:var(--text3);margin-top:2px}
 
 /* FOCUS */
-.focus-item{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;border-radius:var(--rs);border:1px solid var(--border);background:var(--surface2);margin-bottom:7px;cursor:grab;transition:all .15s}
-.focus-item:hover{border-color:var(--border2)}
+.focus-item{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;border-radius:var(--rs);border:1px solid var(--border);background:var(--surface2);margin-bottom:7px}
 .focus-item.done{opacity:.45}
 .focus-item.done .focus-text{text-decoration:line-through;color:var(--text3)}
 .focus-chk{width:20px;height:20px;border-radius:50%;border:2px solid var(--border2);cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;margin-top:1px}
 .focus-chk.on{background:var(--accent);border-color:var(--accent)}
 .focus-chk.on::after{content:'✓';font-size:11px;color:#fff}
 .focus-text{font-size:14px;color:var(--text);flex:1;line-height:1.4}
-.focus-sub{font-size:11px;color:var(--text2);margin-top:2px}
-.focus-del{font-size:16px;color:var(--text3);cursor:pointer;padding:0 3px;transition:color .15s}
+.focus-del{font-size:16px;color:var(--text3);cursor:pointer;padding:0 3px}
 .focus-del:hover{color:var(--coral)}
 .progress-wrap{background:var(--surface3);border-radius:4px;height:5px;margin-top:8px;overflow:hidden}
 .progress-fill{height:100%;border-radius:4px;transition:width .4s}
 .pf-accent{background:var(--accent)}
 .pf-green{background:var(--green)}
 
-/* HABITS MONTHLY */
+/* HABITS */
 .habit-m-row{margin-bottom:1.25rem}
 .habit-m-name{font-size:13px;font-weight:600;color:var(--text);margin-bottom:5px;display:flex;justify-content:space-between;align-items:center}
 .habit-m-pct{font-size:11px;color:var(--text3)}
@@ -193,6 +181,24 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:.85rem
 .hmdot.on.today{border-color:var(--green);color:#fff}
 .hmdot.future{opacity:.25;cursor:default}
 
+/* ANALYTICS */
+.analytics-controls{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.25rem;align-items:center}
+.a-select{background:var(--surface2);border:1px solid var(--border);border-radius:var(--rs);padding:7px 11px;font-size:13px;color:var(--text);outline:none;cursor:pointer;appearance:none;-webkit-appearance:none}
+.a-select:focus{border-color:var(--accent)}
+.heatmap-wrap{overflow-x:auto;padding-bottom:4px}
+.heatmap-grid{display:flex;gap:3px;align-items:flex-end}
+.hm-col{display:flex;flex-direction:column;gap:3px}
+.hm-cell{width:14px;height:14px;border-radius:3px;transition:all .12s;cursor:default;position:relative}
+.hm-cell:hover .hm-tooltip{display:block}
+.hm-tooltip{display:none;position:absolute;bottom:18px;left:50%;transform:translateX(-50%);background:var(--surface3);border:1px solid var(--border2);border-radius:5px;padding:4px 8px;font-size:11px;color:var(--text);white-space:nowrap;z-index:10;pointer-events:none}
+.hm-month-label{font-size:10px;color:var(--text3);text-align:center;margin-bottom:4px}
+.chart-wrap{width:100%;height:200px;position:relative;margin-top:.5rem}
+canvas{width:100%!important;display:block}
+.legend-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:.75rem}
+.legend-item{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--text2)}
+.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.analytics-empty{font-size:13px;color:var(--text3);padding:2rem;text-align:center}
+
 /* MODAL */
 .modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:300;align-items:center;justify-content:center}
 .modal-bg.open{display:flex}
@@ -201,48 +207,45 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:.85rem
 .modal-input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--rs);padding:9px 12px;font-size:13px;color:var(--text);outline:none;margin-bottom:8px}
 .modal-input:focus{border-color:var(--accent)}
 .modal-input::placeholder{color:var(--text3)}
-.modal-select{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--rs);padding:9px 12px;font-size:13px;color:var(--text);outline:none;margin-bottom:12px;appearance:none}
-.modal-select:focus{border-color:var(--accent)}
-.modal-btns{display:flex;gap:8px;justify-content:flex-end}
+.modal-btns{display:flex;gap:8px;justify-content:flex-end;margin-top:4px}
 .btn-cancel{padding:8px 14px;background:var(--surface3);border:none;border-radius:var(--rs);color:var(--text2);font-size:13px;cursor:pointer}
 .btn-save{padding:8px 14px;background:var(--accent);border:none;border-radius:var(--rs);color:#fff;font-size:13px;font-weight:600;cursor:pointer}
 .btn-save:hover{background:var(--accent2)}
-
-/* STATUS PILLS GRID */
 .status-grid{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
 .spill{padding:5px 11px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid transparent;transition:all .12s;user-select:none}
 .spill.selected{box-shadow:0 0 0 2px var(--accent)}
 
-/* WEEK FOCUS ARCHIVE */
+.quote-bar{background:var(--accent-soft);border:1px solid rgba(127,119,221,.2);border-radius:var(--rs);padding:11px 15px;margin-bottom:1.1rem;font-size:13px;color:var(--text2);font-style:italic}
+.flex-between{display:flex;align-items:center;justify-content:space-between}
+.show-archive-btn{font-size:12px;color:var(--text3);background:none;border:none;cursor:pointer;text-decoration:underline;padding:0}
+.show-archive-btn:hover{color:var(--text2)}
 .archive-item{padding:10px 14px;border-radius:var(--rs);border:1px solid var(--border);background:var(--surface2);margin-bottom:6px}
 .archive-week{font-size:11px;color:var(--text3);margin-bottom:4px}
 .archive-task{font-size:13px;color:var(--text2);display:flex;align-items:center;gap:6px}
 .archive-task.done{text-decoration:line-through;color:var(--text3)}
-
-.quote-bar{background:var(--accent-soft);border:1px solid rgba(127,119,221,.2);border-radius:var(--rs);padding:11px 15px;margin-bottom:1.25rem;font-size:13px;color:var(--text2);font-style:italic}
-.sep{height:1px;background:var(--border);margin:1.25rem 0}
-.flex-row{display:flex;align-items:center;gap:8px}
-.flex-between{display:flex;align-items:center;justify-content:space-between}
-.show-archive-btn{font-size:12px;color:var(--text3);background:none;border:none;cursor:pointer;text-decoration:underline;padding:0}
-.show-archive-btn:hover{color:var(--text2)}
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="nav-title">📅 Мой планировщик</div>
+  <div class="nav-title">📅 Планировщик</div>
   <div class="nav-tabs">
     <button class="tab active" onclick="showPage('day',this)">День</button>
     <button class="tab" onclick="showPage('week',this)">Неделя</button>
     <button class="tab" onclick="showPage('cal',this)">Месяц</button>
     <button class="tab" onclick="showPage('focus',this)">Фокус</button>
     <button class="tab" onclick="showPage('habits',this)">Привычки</button>
+    <button class="tab" onclick="showPage('analytics',this)">Аналитика</button>
   </div>
-  <div class="nav-date" id="navDate"></div>
 </nav>
 
 <!-- DAY -->
 <div class="page active" id="page-day">
+  <div class="day-nav">
+    <button class="day-nav-btn" id="btnPrevDay" onclick="shiftDay(-1)">←</button>
+    <div class="day-nav-label" id="dayNavLabel"></div>
+    <button class="day-nav-btn" id="btnNextDay" onclick="shiftDay(1)">→</button>
+  </div>
   <div class="quote-bar" id="quoteBar"></div>
   <div class="stats-row">
     <div class="stat-card"><div class="stat-num" id="sDone">0</div><div class="stat-label">задач выполнено</div></div>
@@ -257,7 +260,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:.85rem
     <div class="card" style="margin:0">
       <div class="card-title"><span class="dot" style="background:var(--amber)"></span>Задачи</div>
       <div class="task-list" id="taskList"></div>
-      <div class="add-row" style="margin-top:8px">
+      <div id="dayAddRow" class="add-row">
         <input class="add-input" id="taskInput" placeholder="Добавить задачу..." onkeydown="if(event.key==='Enter')addTask()">
         <select class="status-select" id="taskType"></select>
         <button class="add-btn" onclick="addTask()">+</button>
@@ -273,6 +276,10 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:.85rem
 <!-- WEEK -->
 <div class="page" id="page-week">
   <div class="week-grid" id="weekGrid"></div>
+  <div class="card" style="margin-top:.5rem">
+    <div class="card-title"><span class="dot" style="background:var(--green)"></span>Заметки недели: <span id="weekNotesRange" style="font-weight:400;color:var(--text3);text-transform:none;letter-spacing:0"></span></div>
+    <div id="weekNotesList"></div>
+  </div>
 </div>
 
 <!-- CALENDAR -->
@@ -299,11 +306,10 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:.85rem
       <button class="add-btn" onclick="addFocusMonth()">+</button>
     </div>
   </div>
-
   <div class="card">
     <div class="flex-between" style="margin-bottom:.75rem">
       <div class="card-title" style="margin:0"><span class="dot" style="background:var(--green)"></span>Фокус недели — <span id="focusWeekLabel"></span></div>
-      <button class="show-archive-btn" onclick="toggleArchive()">архив недель</button>
+      <button class="show-archive-btn" onclick="toggleArchive()">архив</button>
     </div>
     <div class="progress-wrap" style="margin-bottom:1rem"><div class="progress-fill pf-green" id="focusWeekBar" style="width:0%"></div></div>
     <div id="focusWeekList"></div>
@@ -330,10 +336,42 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:.85rem
   </div>
 </div>
 
-<!-- MODAL (week/cal add) -->
+<!-- ANALYTICS -->
+<div class="page" id="page-analytics">
+  <div class="card">
+    <div class="card-title"><span class="dot" style="background:var(--accent)"></span>Активность по привычкам</div>
+    <div class="analytics-controls">
+      <select class="a-select" id="aHabitSel" onchange="renderAnalytics()"></select>
+      <select class="a-select" id="aPeriodSel" onchange="renderAnalytics()">
+        <option value="month">Этот месяц</option>
+        <option value="3month">3 месяца</option>
+        <option value="6month">6 месяцев</option>
+        <option value="year">Год</option>
+      </select>
+    </div>
+    <div class="heatmap-wrap"><div id="heatmapGrid" class="heatmap-grid"></div></div>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="dot" style="background:var(--green)"></span>График выполнения</div>
+    <div class="analytics-controls">
+      <select class="a-select" id="aChartHabitSel" onchange="renderChart()">
+        <option value="all">Все привычки</option>
+      </select>
+      <select class="a-select" id="aChartPeriod" onchange="renderChart()">
+        <option value="week">Эта неделя</option>
+        <option value="month">Этот месяц</option>
+        <option value="3month">3 месяца</option>
+      </select>
+    </div>
+    <div class="chart-wrap"><canvas id="activityChart"></canvas></div>
+    <div class="legend-row" id="chartLegend"></div>
+  </div>
+</div>
+
+<!-- MODAL -->
 <div class="modal-bg" id="modalBg" onclick="if(event.target===this)closeModal()">
   <div class="modal">
-    <div class="modal-title" id="modalTitle">Добавить событие</div>
+    <div class="modal-title" id="modalTitle">Добавить</div>
     <input class="modal-input" id="modalTextInput" placeholder="Название...">
     <div class="slabel" style="margin-bottom:6px">Тип</div>
     <div class="status-grid" id="modalStatusGrid"></div>
@@ -346,11 +384,12 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:.85rem
 </div>
 
 <script>
-// ── CONSTANTS ──────────────────────────────────────────────
-const DAYS_SHORT = ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'];
-const MONTHS = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
-const MONTHS_GEN = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
-const QUOTES = [
+// ── CONSTANTS ─────────────────────────────────────────────
+const DAYS_SHORT=['Вс','Пн','Вт','Ср','Чт','Пт','Сб'];
+const DAYS_FULL=['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'];
+const MONTHS=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+const MONTHS_GEN=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+const QUOTES=[
   'Маленький прогресс — это всё равно прогресс.',
   'Дисциплина — это выбор между тем, чего хочешь сейчас, и тем, чего хочешь больше всего.',
   'Каждый день — это шанс стать чуть лучше.',
@@ -359,25 +398,22 @@ const QUOTES = [
   'Начни там, где ты есть. Используй что есть. Делай что можешь.',
   'Успех — это несколько правильных решений, повторяемых каждый день.'
 ];
-
-const BASE_STATUSES = [
-  {id:'work',  label:'Работа',  cls:'sc-work'},
-  {id:'sport', label:'Спорт',   cls:'sc-sport'},
-  {id:'meeting',label:'Встреча',cls:'sc-meeting'},
-  {id:'trip',  label:'Поездка', cls:'sc-trip'},
-  {id:'hobby', label:'Хобби',   cls:'sc-hobby'},
-  {id:'rest',  label:'Отдых',   cls:'sc-rest'},
-  {id:'food',  label:'Питание', cls:'sc-food'},
+const BASE_STATUSES=[
+  {id:'work',label:'Работа',cls:'sc-work',color:'#7f77dd'},
+  {id:'sport',label:'Спорт',cls:'sc-sport',color:'#1d9e75'},
+  {id:'meeting',label:'Встреча',cls:'sc-meeting',color:'#378add'},
+  {id:'trip',label:'Поездка',cls:'sc-trip',color:'#ef9f27'},
+  {id:'hobby',label:'Хобби',cls:'sc-hobby',color:'#d4537e'},
+  {id:'rest',label:'Отдых',cls:'sc-rest',color:'#4a4a55'},
+  {id:'food',label:'Питание',cls:'sc-food',color:'#d85a30'},
 ];
-
-const DEFAULT_HABITS = [
+const DEFAULT_HABITS=[
   {id:'h1',name:'Тренировка',icon:'💪'},
   {id:'h2',name:'Чтение (30 мин)',icon:'📚'},
   {id:'h3',name:'Планирование дня',icon:'📋'},
   {id:'h4',name:'Подработка',icon:'💼'},
 ];
-
-const DEFAULT_BLOCKS = [
+const DEFAULT_BLOCKS=[
   {id:'b1',time:'09:00 – 16:00',label:'Работа',note:'',type:'work'},
   {id:'b2',time:'16:00 – 17:00',label:'Свободное время',note:'Книга / отдых / подработка',type:'rest'},
   {id:'b3',time:'17:00 – 19:30',label:'Тренировка',note:'',type:'sport'},
@@ -386,80 +422,38 @@ const DEFAULT_BLOCKS = [
   {id:'b6',time:'22:00+',label:'Планирование завтра',note:'3 главные задачи на утро',type:'work'},
 ];
 
-const today = new Date();
-const todayKey = fmtDate(today);
+// ── STATE ─────────────────────────────────────────────────
+const today=new Date();
+const todayKey=fmtDate(today);
+let currentDate=new Date(today);
 
-// ── STORAGE ───────────────────────────────────────────────
-function S(k,v){
-  if(v===undefined){try{return JSON.parse(localStorage.getItem(k))}catch{return null}}
-  localStorage.setItem(k,JSON.stringify(v));
-}
-
-function fmtDate(d){ return d.toISOString().split('T')[0]; }
-
-function getWeekKey(d){
-  const mon = new Date(d);
-  const dow = mon.getDay()===0?6:mon.getDay()-1;
-  mon.setDate(mon.getDate()-dow);
-  return fmtDate(mon);
-}
+function fmtDate(d){return d.toISOString().split('T')[0];}
+function S(k,v){if(v===undefined){try{return JSON.parse(localStorage.getItem(k))}catch{return null}}localStorage.setItem(k,JSON.stringify(v));}
+function getWeekKey(d){const m=new Date(d);const dow=m.getDay()===0?6:m.getDay()-1;m.setDate(m.getDate()-dow);return fmtDate(m);}
 
 // ── STATUSES ──────────────────────────────────────────────
-function getStatuses(){
-  const custom = S('custom_statuses')||[];
-  return [...BASE_STATUSES,...custom.map(s=>({id:'c_'+s,label:s,cls:'sc-custom'}))];
-}
-function addCustomStatus(label){
-  if(!label)return;
-  const c=S('custom_statuses')||[];
-  if(!c.includes(label)){c.push(label);S('custom_statuses',c);}
-}
-function getStatusInfo(id){
-  return getStatuses().find(s=>s.id===id)||{id,label:id,cls:'sc-custom'};
-}
-function statusColor(id){
-  const map={work:'var(--accent)',sport:'var(--green)',meeting:'var(--blue)',trip:'var(--amber)',hobby:'var(--pink)',rest:'var(--text3)',food:'var(--coral)'};
-  return map[id]||'var(--accent)';
-}
+function getStatuses(){const c=S('custom_statuses')||[];return [...BASE_STATUSES,...c.map(s=>({id:'c_'+s,label:s,cls:'sc-custom',color:'#888'}))];}
+function addCustomStatus(label){if(!label)return;const c=S('custom_statuses')||[];if(!c.includes(label)){c.push(label);S('custom_statuses',c);}}
+function getStatusInfo(id){return getStatuses().find(s=>s.id===id)||{id,label:id,cls:'sc-custom',color:'#888'};}
+function statusColor(id){const s=getStatusInfo(id);return s.color||'#888';}
 
 function buildStatusSelect(elId){
-  const sel=document.getElementById(elId);
-  if(!sel)return;
+  const sel=document.getElementById(elId);if(!sel)return;
   const statuses=getStatuses();
   sel.innerHTML=statuses.map(s=>`<option value="${s.id}">${s.label}</option>`).join('');
-  // Add custom option
   sel.innerHTML+=`<option value="__new__">+ Добавить свой...</option>`;
-  sel.onchange=function(){
-    if(this.value==='__new__'){
-      const label=prompt('Название нового типа:');
-      if(label){addCustomStatus(label);buildStatusSelect(elId);sel.value='c_'+label;}
-      else{sel.value='work';}
-    }
-  };
+  sel.onchange=function(){if(this.value==='__new__'){const label=prompt('Название нового типа:');if(label){addCustomStatus(label);buildStatusSelect(elId);sel.value='c_'+label;}else{sel.value='work';}}};
 }
 
 function buildModalStatusGrid(selected){
   const statuses=getStatuses();
   const grid=document.getElementById('modalStatusGrid');
-  grid.innerHTML=statuses.map(s=>`
-    <div class="spill status-chip ${s.cls} ${s.id===selected?'selected':''}"
-      onclick="selectModalStatus('${s.id}',this)">${s.label}</div>
-  `).join('')+`<div class="spill sc-custom" onclick="addCustomStatusModal(this)" style="border:1.5px dashed rgba(255,255,255,.15)">+ Свой</div>`;
+  grid.innerHTML=statuses.map(s=>`<div class="spill status-chip ${s.cls} ${s.id===selected?'selected':''}" onclick="selModalStatus('${s.id}',this)">${s.label}</div>`).join('')
+    +`<div class="spill sc-custom" onclick="addCustomStatusModal(this)" style="border:1.5px dashed rgba(255,255,255,.15)">+ Свой</div>`;
   document.getElementById('modalStatusVal').value=selected||'work';
 }
-
-function selectModalStatus(id,el){
-  document.querySelectorAll('#modalStatusGrid .spill').forEach(e=>e.classList.remove('selected'));
-  el.classList.add('selected');
-  document.getElementById('modalStatusVal').value=id;
-}
-
-function addCustomStatusModal(btn){
-  const label=prompt('Название нового типа:');
-  if(!label)return;
-  addCustomStatus(label);
-  buildModalStatusGrid('c_'+label);
-}
+function selModalStatus(id,el){document.querySelectorAll('#modalStatusGrid .spill').forEach(e=>e.classList.remove('selected'));el.classList.add('selected');document.getElementById('modalStatusVal').value=id;}
+function addCustomStatusModal(){const label=prompt('Название нового типа:');if(!label)return;addCustomStatus(label);buildModalStatusGrid('c_'+label);}
 
 // ── PAGES ─────────────────────────────────────────────────
 function showPage(name,btn){
@@ -467,38 +461,61 @@ function showPage(name,btn){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('page-'+name).classList.add('active');
   if(btn)btn.classList.add('active');
-  if(name==='week')renderWeek();
+  if(name==='week'){renderWeek();renderWeekNotes();}
   if(name==='cal')renderCal();
   if(name==='focus'){renderFocusMonth();renderFocusWeek();}
   if(name==='habits')renderHabits();
+  if(name==='analytics')initAnalytics();
 }
 
-// ── DAY ───────────────────────────────────────────────────
-function getBlocks(){ return S('blocks_'+todayKey)||DEFAULT_BLOCKS; }
-function saveBlocks(b){ S('blocks_'+todayKey,b); }
-
-function renderBlocks(){
-  const blocks=getBlocks();
-  document.getElementById('timeBlocks').innerHTML=blocks.map(b=>`
-    <div class="tblock type-${b.type} ${b.done?'done':''}" id="bl_${b.id}">
-      <div class="block-time">${b.time}</div>
-      <div style="flex:1">
-        <div class="block-label">${b.label}</div>
-        ${b.note?`<div class="block-note">${b.note}</div>`:''}
-      </div>
-      <div class="chk ${b.done?'on':''}" onclick="toggleBlock('${b.id}')"></div>
-    </div>`).join('');
+// ── DAY NAVIGATION ────────────────────────────────────────
+function shiftDay(dir){
+  currentDate.setDate(currentDate.getDate()+dir);
+  renderDayNav();
+  renderBlocks();
+  renderTasks();
+  renderDayNotes();
   updateStats();
 }
 
-function toggleBlock(id){
-  const b=getBlocks(),x=b.find(i=>i.id===id);
-  if(x){x.done=!x.done;saveBlocks(b);renderBlocks();}
+function renderDayNav(){
+  const key=fmtDate(currentDate);
+  const isToday=key===todayKey;
+  const opts={weekday:'long',day:'numeric',month:'long'};
+  const label=currentDate.toLocaleDateString('ru-RU',opts);
+  document.getElementById('dayNavLabel').innerHTML=label+(isToday?'<span class="today-badge">сегодня</span>':'');
+  document.getElementById('btnNextDay').disabled=isToday;
+  // disable add row for past days? No — allow editing past
+  const addRow=document.getElementById('dayAddRow');
+  addRow.style.display='flex';
 }
 
-// Tasks
-function getTasks(){ return S('tasks_'+todayKey)||[]; }
-function saveTasks(t){ S('tasks_'+todayKey,t); }
+function getCurKey(){return fmtDate(currentDate);}
+
+// ── BLOCKS ────────────────────────────────────────────────
+function getBlocks(){return S('blocks_'+getCurKey())||DEFAULT_BLOCKS;}
+function saveBlocks(b){S('blocks_'+getCurKey(),b);}
+
+function renderBlocks(){
+  const blocks=getBlocks();
+  const key=getCurKey();
+  document.getElementById('timeBlocks').innerHTML=blocks.map(b=>`
+    <div class="tblock type-${b.type} ${b.done?'done':''}">
+      <div class="block-time">${b.time}</div>
+      <div style="flex:1"><div class="block-label">${b.label}</div>${b.note?`<div class="block-note">${b.note}</div>`:''}</div>
+      <div class="chk ${b.done?'on':''}" onclick="toggleBlock('${b.id}','${key}')"></div>
+    </div>`).join('');
+}
+
+function toggleBlock(id,key){
+  const b=S('blocks_'+key)||DEFAULT_BLOCKS;
+  const x=b.find(i=>i.id===id);
+  if(x){x.done=!x.done;S('blocks_'+key,b);renderBlocks();updateStats();}
+}
+
+// ── TASKS ─────────────────────────────────────────────────
+function getTasks(key){return S('tasks_'+(key||getCurKey()))||[];}
+function saveTasks(t,key){S('tasks_'+(key||getCurKey()),t);}
 
 function renderTasks(){
   const tasks=getTasks();
@@ -506,86 +523,58 @@ function renderTasks(){
   if(!tasks.length){el.innerHTML=`<div style="font-size:13px;color:var(--text3);padding:6px 0">Задач нет. Добавь первую!</div>`;updateStats();return;}
   el.innerHTML=tasks.map((t,i)=>{
     const s=getStatusInfo(t.type||'work');
-    return `<div class="task-item ${t.done?'done':''}" draggable="true"
-      ondragstart="dragTask(${i})" ondragover="event.preventDefault();this.classList.add('drag-over')"
-      ondragleave="this.classList.remove('drag-over')" ondrop="dropTask(event,${i})">
+    return `<div class="task-item ${t.done?'done':''}">
       <div class="tchk ${t.done?'on':''}" onclick="toggleTask(${i})"></div>
       <div class="task-text">${t.text}</div>
-      <span class="status-chip ${s.cls}" style="font-size:10px;padding:2px 7px">${s.label}</span>
+      <span class="sc ${s.cls}" style="font-size:10px;padding:2px 7px">${s.label}</span>
       <span class="task-del" onclick="delTask(${i})">×</span>
     </div>`;
   }).join('');
   updateStats();
 }
 
-let _dragIdx=null;
-function dragTask(i){_dragIdx=i;}
-function dropTask(e,i){
-  e.preventDefault();
-  e.currentTarget.classList.remove('drag-over');
-  if(_dragIdx===null||_dragIdx===i)return;
-  const tasks=getTasks();
-  const item=tasks.splice(_dragIdx,1)[0];
-  tasks.splice(i,0,item);
-  saveTasks(tasks);_dragIdx=null;renderTasks();
-}
-
 function addTask(){
   const input=document.getElementById('taskInput');
   const type=document.getElementById('taskType').value;
-  const text=input.value.trim();
-  if(!text)return;
-  const tasks=getTasks();
-  tasks.push({text,type,done:false});
-  saveTasks(tasks);input.value='';renderTasks();
+  const text=input.value.trim();if(!text)return;
+  const tasks=getTasks();tasks.push({text,type,done:false});saveTasks(tasks);input.value='';renderTasks();
 }
-
 function toggleTask(i){const t=getTasks();t[i].done=!t[i].done;saveTasks(t);renderTasks();}
 function delTask(i){const t=getTasks();t.splice(i,1);saveTasks(t);renderTasks();}
 
-function initNotes(){
+// ── NOTES ─────────────────────────────────────────────────
+function renderDayNotes(){
   const el=document.getElementById('dayNotes');
-  el.value=S('notes_'+todayKey)||'';
-  el.addEventListener('input',()=>S('notes_'+todayKey,el.value));
+  el.value=S('notes_'+getCurKey())||'';
+  el.oninput=()=>S('notes_'+getCurKey(),el.value);
 }
 
+// ── STATS ─────────────────────────────────────────────────
 function updateStats(){
   const tasks=getTasks();
   const done=tasks.filter(t=>t.done).length;
   document.getElementById('sDone').textContent=done+'/'+tasks.length;
   const habits=S('habits')||DEFAULT_HABITS;
-  const hdone=habits.filter(h=>{const d=S('habit_'+h.id)||{};return d[todayKey];}).length;
+  const hdone=habits.filter(h=>{const d=S('habit_'+h.id)||{};return d[getCurKey()];}).length;
   document.getElementById('sHab').textContent=hdone+'/'+habits.length;
-  let streak=0;
-  const d=new Date(today);
-  for(let i=0;i<60;i++){
-    const k=fmtDate(d);
-    const t=S('tasks_'+k)||[];
-    if(!t.length)break;
-    if(!t.every(x=>x.done))break;
-    streak++;d.setDate(d.getDate()-1);
-  }
+  let streak=0;const d=new Date(today);
+  for(let i=0;i<90;i++){const k=fmtDate(d);const t=S('tasks_'+k)||[];if(!t.length)break;if(!t.every(x=>x.done))break;streak++;d.setDate(d.getDate()-1);}
   document.getElementById('sStreak').textContent=streak;
 }
 
 // ── WEEK ──────────────────────────────────────────────────
+function getMonday(d){const m=new Date(d);const dow=m.getDay()===0?6:m.getDay()-1;m.setDate(m.getDate()-dow);return m;}
+
 function renderWeek(){
-  const mon=new Date(today);
-  const dow=mon.getDay()===0?6:mon.getDay()-1;
-  mon.setDate(mon.getDate()-dow);
-  const grid=document.getElementById('weekGrid');
-  grid.innerHTML=Array.from({length:7},(_,i)=>{
+  const mon=getMonday(today);
+  document.getElementById('weekGrid').innerHTML=Array.from({length:7},(_,i)=>{
     const d=new Date(mon);d.setDate(mon.getDate()+i);
-    const key=fmtDate(d);
-    const isToday=key===todayKey;
+    const key=fmtDate(d);const isToday=key===todayKey;
     const tasks=S('week_tasks_'+key)||[];
-    const pills=tasks.map((t,idx)=>{
-      const s=getStatusInfo(t.type);
-      return `<div class="wpill type-${t.type} ${t.done?'done':''}">
-        <div class="wpill-chk ${t.done?'on':''}" onclick="toggleWeekTask('${key}',${idx})"></div>
-        <span onclick="delWeekTask('${key}',${idx})" title="Удалить" style="flex:1">${t.text}</span>
-      </div>`;
-    }).join('');
+    const pills=tasks.map((t,idx)=>`<div class="wpill type-${t.type} ${t.done?'done':''}">
+      <div class="wpill-chk ${t.done?'on':''}" onclick="toggleWeekTask('${key}',${idx})"></div>
+      <span onclick="delWeekTask('${key}',${idx})" style="flex:1">${t.text}</span>
+    </div>`).join('');
     return `<div class="wday ${isToday?'today':''}">
       <div class="wday-name">${DAYS_SHORT[d.getDay()]}</div>
       <div class="wday-num">${d.getDate()}</div>
@@ -595,17 +584,35 @@ function renderWeek(){
   }).join('');
 }
 
-function toggleWeekTask(key,idx){
-  const t=S('week_tasks_'+key)||[];
-  t[idx].done=!t[idx].done;S('week_tasks_'+key,t);renderWeek();
-}
-function delWeekTask(key,idx){
-  const t=S('week_tasks_'+key)||[];t.splice(idx,1);S('week_tasks_'+key,t);renderWeek();
+function toggleWeekTask(key,idx){const t=S('week_tasks_'+key)||[];t[idx].done=!t[idx].done;S('week_tasks_'+key,t);renderWeek();}
+function delWeekTask(key,idx){const t=S('week_tasks_'+key)||[];t.splice(idx,1);S('week_tasks_'+key,t);renderWeek();}
+
+function renderWeekNotes(){
+  const mon=getMonday(today);
+  const sun=new Date(mon);sun.setDate(mon.getDate()+6);
+  const pad=n=>String(n).padStart(2,'0');
+  const rangeStr=pad(mon.getDate())+'.'+pad(mon.getMonth()+1)+' – '+pad(sun.getDate())+'.'+pad(sun.getMonth()+1);
+  const rangeEl=document.getElementById('weekNotesRange');
+  if(rangeEl)rangeEl.textContent=rangeStr;
+  const el=document.getElementById('weekNotesList');
+  const items=[];
+  for(let i=0;i<7;i++){
+    const d=new Date(mon);d.setDate(mon.getDate()+i);
+    const key=fmtDate(d);
+    const note=S('notes_'+key)||'';
+    if(note.trim()){
+      const dayName=DAYS_FULL[d.getDay()]+', '+d.getDate()+' '+MONTHS_GEN[d.getMonth()];
+      items.push(`<div class="week-note-item">
+        <div class="week-note-date">${dayName}</div>
+        <div class="week-note-text">${note.trim()}</div>
+      </div>`);
+    }
+  }
+  el.innerHTML=items.length?items.join(''):`<div style="font-size:13px;color:var(--text3);padding:8px 0">Заметок за эту неделю нет</div>`;
 }
 
 // ── CALENDAR ──────────────────────────────────────────────
 let calYear=today.getFullYear(),calMonth=today.getMonth();
-
 function calMove(dir){calMonth+=dir;if(calMonth>11){calMonth=0;calYear++;}else if(calMonth<0){calMonth=11;calYear--;}renderCal();}
 
 function renderCal(){
@@ -613,139 +620,90 @@ function renderCal(){
   const first=new Date(calYear,calMonth,1);
   const last=new Date(calYear,calMonth+1,0);
   const startDow=first.getDay()===0?6:first.getDay()-1;
-  const grid=document.getElementById('calGrid');
   const dowLabels=['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
   let html=dowLabels.map(d=>`<div class="cal-dow">${d}</div>`).join('');
-  for(let i=0;i<startDow;i++){
-    const d=new Date(calYear,calMonth,1-startDow+i);
-    html+=`<div class="cal-cell other-month"><div class="cal-day-num">${d.getDate()}</div></div>`;
-  }
+  for(let i=0;i<startDow;i++){const d=new Date(calYear,calMonth,1-startDow+i);html+=`<div class="cal-cell other-month"><div class="cal-day-num">${d.getDate()}</div></div>`;}
   for(let day=1;day<=last.getDate();day++){
-    const d=new Date(calYear,calMonth,day);
-    const key=fmtDate(d);
-    const isToday=key===todayKey;
-    const isWe=d.getDay()===0||d.getDay()===6;
-    const events=S('cal_'+key)||[];
-    const shown=events.slice(0,3);
-    const more=events.length-3;
-    const evHtml=shown.map((ev,idx)=>`
-      <div class="cal-evt ${ev.done?'done':''}" style="background:${statusColor(ev.type)}18;color:${statusColor(ev.type)}"
-        onclick="toggleCalEvent('${key}',${idx})">
-        <div class="cal-evt-dot" style="background:${statusColor(ev.type)};flex-shrink:0"></div>
-        ${ev.text}
-      </div>`).join('');
+    const d=new Date(calYear,calMonth,day);const key=fmtDate(d);
+    const isToday=key===todayKey;const isWe=d.getDay()===0||d.getDay()===6;
+    const events=S('cal_'+key)||[];const shown=events.slice(0,3);const more=events.length-3;
+    const evHtml=shown.map((ev,idx)=>`<div class="cal-evt ${ev.done?'done':''}" style="background:${statusColor(ev.type)}22;color:${statusColor(ev.type)}" onclick="toggleCalEvent('${key}',${idx})">
+      <div class="cal-evt-dot" style="background:${statusColor(ev.type)}"></div>${ev.text}</div>`).join('');
     html+=`<div class="cal-cell ${isToday?'today':''} ${isWe?'weekend':''}" ondblclick="openModal('cal','${key}')">
       <div class="cal-day-num">${day}</div>
       <div class="cal-events">${evHtml}${more>0?`<div class="cal-more">+${more} ещё</div>`:''}</div>
     </div>`;
   }
-  const remaining=(7-((startDow+last.getDate())%7))%7;
-  for(let i=1;i<=remaining;i++){
-    html+=`<div class="cal-cell other-month"><div class="cal-day-num">${i}</div></div>`;
-  }
-  grid.innerHTML=html;
+  const rem=(7-((startDow+last.getDate())%7))%7;
+  for(let i=1;i<=rem;i++)html+=`<div class="cal-cell other-month"><div class="cal-day-num">${i}</div></div>`;
+  document.getElementById('calGrid').innerHTML=html;
 }
 
-function toggleCalEvent(key,idx){
-  const ev=S('cal_'+key)||[];ev[idx].done=!ev[idx].done;S('cal_'+key,ev);renderCal();
-}
+function toggleCalEvent(key,idx){const ev=S('cal_'+key)||[];ev[idx].done=!ev[idx].done;S('cal_'+key,ev);renderCal();}
 
-// ── FOCUS MONTH ───────────────────────────────────────────
-function getFocusMonthKey(){ return `focus_month_${today.getFullYear()}_${today.getMonth()}`; }
-function getFocusMonth(){ return S(getFocusMonthKey())||[]; }
+// ── FOCUS ─────────────────────────────────────────────────
+function getFMKey(){return `focus_month_${today.getFullYear()}_${today.getMonth()}`;}
+function getFM(){return S(getFMKey())||[];}
+function getFWKey(){return 'focus_week_'+getWeekKey(today);}
+function getFW(){return S(getFWKey())||[];}
+
+function getWeekLabel(d){
+  const mon=getMonday(d);const sun=new Date(mon);sun.setDate(mon.getDate()+6);
+  return `${mon.getDate()} ${MONTHS_GEN[mon.getMonth()]} – ${sun.getDate()} ${MONTHS_GEN[sun.getMonth()]}`;
+}
 
 function renderFocusMonth(){
-  const items=getFocusMonth();
-  const done=items.filter(i=>i.done).length;
+  const items=getFM();const done=items.filter(i=>i.done).length;
   const pct=items.length?Math.round(done/items.length*100):0;
   document.getElementById('focusMonthLabel').textContent=MONTHS[today.getMonth()];
   document.getElementById('focusMonthPct').textContent=`${done}/${items.length} · ${pct}%`;
   document.getElementById('focusMonthBar').style.width=pct+'%';
   document.getElementById('focusMonthList').innerHTML=items.map((item,i)=>`
     <div class="focus-item ${item.done?'done':''}">
-      <div class="focus-chk ${item.done?'on':''}" onclick="toggleFocusMonth(${i})"></div>
-      <div style="flex:1">
-        <div class="focus-text">${item.text}</div>
-        ${item.note?`<div class="focus-sub">${item.note}</div>`:''}
-      </div>
-      <span class="focus-del" onclick="delFocusMonth(${i})">×</span>
+      <div class="focus-chk ${item.done?'on':''}" onclick="toggleFM(${i})"></div>
+      <div class="focus-text" style="flex:1">${item.text}</div>
+      <span class="focus-del" onclick="delFM(${i})">×</span>
     </div>`).join('')||`<div style="font-size:13px;color:var(--text3);padding:8px 0">Добавь цели на месяц 👆</div>`;
 }
 
-function addFocusMonth(){
-  const input=document.getElementById('focusMonthInput');
-  const text=input.value.trim();if(!text)return;
-  const items=getFocusMonth();items.push({text,done:false});
-  S(getFocusMonthKey(),items);input.value='';renderFocusMonth();
-}
-function toggleFocusMonth(i){const items=getFocusMonth();items[i].done=!items[i].done;S(getFocusMonthKey(),items);renderFocusMonth();}
-function delFocusMonth(i){const items=getFocusMonth();items.splice(i,1);S(getFocusMonthKey(),items);renderFocusMonth();}
-
-// ── FOCUS WEEK ────────────────────────────────────────────
-function getFocusWeekKey(){ return 'focus_week_'+getWeekKey(today); }
-function getFocusWeek(){ return S(getFocusWeekKey())||[]; }
-
-function getWeekLabel(d){
-  const mon=new Date(d);
-  const dow=mon.getDay()===0?6:mon.getDay()-1;
-  mon.setDate(mon.getDate()-dow);
-  const sun=new Date(mon);sun.setDate(mon.getDate()+6);
-  return `${mon.getDate()} ${MONTHS_GEN[mon.getMonth()]} – ${sun.getDate()} ${MONTHS_GEN[sun.getMonth()]}`;
-}
+function addFocusMonth(){const input=document.getElementById('focusMonthInput');const text=input.value.trim();if(!text)return;const items=getFM();items.push({text,done:false});S(getFMKey(),items);input.value='';renderFocusMonth();}
+function toggleFM(i){const items=getFM();items[i].done=!items[i].done;S(getFMKey(),items);renderFocusMonth();}
+function delFM(i){const items=getFM();items.splice(i,1);S(getFMKey(),items);renderFocusMonth();}
 
 function renderFocusWeek(){
-  const items=getFocusWeek();
-  const done=items.filter(i=>i.done).length;
+  const items=getFW();const done=items.filter(i=>i.done).length;
   const pct=items.length?Math.round(done/items.length*100):0;
   document.getElementById('focusWeekLabel').textContent=getWeekLabel(today);
   document.getElementById('focusWeekBar').style.width=pct+'%';
   document.getElementById('focusWeekList').innerHTML=items.map((item,i)=>`
     <div class="focus-item ${item.done?'done':''}">
-      <div class="focus-chk ${item.done?'on':''}" onclick="toggleFocusWeek(${i})"></div>
+      <div class="focus-chk ${item.done?'on':''}" onclick="toggleFW(${i})"></div>
       <div class="focus-text" style="flex:1">${item.text}</div>
-      <span class="focus-del" onclick="delFocusWeek(${i})">×</span>
+      <span class="focus-del" onclick="delFW(${i})">×</span>
     </div>`).join('')||`<div style="font-size:13px;color:var(--text3);padding:8px 0">Добавь задачи на эту неделю 👆</div>`;
   renderWeekArchive();
 }
 
-function addFocusWeek(){
-  const input=document.getElementById('focusWeekInput');
-  const text=input.value.trim();if(!text)return;
-  const items=getFocusWeek();items.push({text,done:false});
-  S(getFocusWeekKey(),items);input.value='';renderFocusWeek();
-}
-function toggleFocusWeek(i){const items=getFocusWeek();items[i].done=!items[i].done;S(getFocusWeekKey(),items);renderFocusWeek();}
-function delFocusWeek(i){const items=getFocusWeek();items.splice(i,1);S(getFocusWeekKey(),items);renderFocusWeek();}
+function addFocusWeek(){const input=document.getElementById('focusWeekInput');const text=input.value.trim();if(!text)return;const items=getFW();items.push({text,done:false});S(getFWKey(),items);input.value='';renderFocusWeek();}
+function toggleFW(i){const items=getFW();items[i].done=!items[i].done;S(getFWKey(),items);renderFocusWeek();}
+function delFW(i){const items=getFW();items.splice(i,1);S(getFWKey(),items);renderFocusWeek();}
 
 function renderWeekArchive(){
-  const allKeys=[];
-  for(let i=0;i<localStorage.length;i++){
-    const k=localStorage.key(i);
-    if(k&&k.startsWith('focus_week_')&&k!==getFocusWeekKey())allKeys.push(k);
-  }
+  const allKeys=[];for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&k.startsWith('focus_week_')&&k!==getFWKey())allKeys.push(k);}
   allKeys.sort().reverse();
   const el=document.getElementById('archiveList');
   if(!allKeys.length){el.innerHTML=`<div style="font-size:13px;color:var(--text3)">Архив пуст</div>`;return;}
   el.innerHTML=allKeys.slice(0,8).map(k=>{
-    const items=S(k)||[];
-    const dateStr=k.replace('focus_week_','');
-    const d=new Date(dateStr);
-    return `<div class="archive-item">
-      <div class="archive-week">Неделя с ${d.getDate()} ${MONTHS_GEN[d.getMonth()]}</div>
-      ${items.map(t=>`<div class="archive-task ${t.done?'done':''}">${t.done?'✓':'○'} ${t.text}</div>`).join('')}
-    </div>`;
+    const items=S(k)||[];const dateStr=k.replace('focus_week_','');const d=new Date(dateStr);
+    return `<div class="archive-item"><div class="archive-week">Неделя с ${d.getDate()} ${MONTHS_GEN[d.getMonth()]}</div>${items.map(t=>`<div class="archive-task ${t.done?'done':''}">${t.done?'✓':'○'} ${t.text}</div>`).join('')}</div>`;
   }).join('');
 }
 
 let _archiveOpen=false;
-function toggleArchive(){
-  _archiveOpen=!_archiveOpen;
-  document.getElementById('focusArchive').style.display=_archiveOpen?'block':'none';
-  if(_archiveOpen)renderWeekArchive();
-}
+function toggleArchive(){_archiveOpen=!_archiveOpen;document.getElementById('focusArchive').style.display=_archiveOpen?'block':'none';if(_archiveOpen)renderWeekArchive();}
 
 // ── HABITS ────────────────────────────────────────────────
-function getHabits(){ return S('habits')||DEFAULT_HABITS; }
+function getHabits(){return S('habits')||DEFAULT_HABITS;}
 
 function renderHabits(){
   const habits=getHabits();
@@ -754,19 +712,15 @@ function renderHabits(){
   document.getElementById('habitsMonthly').innerHTML=habits.map((h,hi)=>{
     const data=S('habit_'+h.id)||{};
     const doneCount=Array.from({length:today.getDate()},(_,i)=>{
-      const d=new Date(today.getFullYear(),today.getMonth(),i+1);
-      return data[fmtDate(d)]?1:0;
+      const d=new Date(today.getFullYear(),today.getMonth(),i+1);return data[fmtDate(d)]?1:0;
     }).reduce((a,b)=>a+b,0);
     const pct=Math.round(doneCount/today.getDate()*100);
     const dots=Array.from({length:daysInMonth},(_,i)=>{
-      const day=i+1;
-      const d=new Date(today.getFullYear(),today.getMonth(),day);
-      const key=fmtDate(d);
-      const isToday=day===today.getDate();
-      const isFuture=day>today.getDate();
-      const isDone=data[key];
+      const day=i+1;const d=new Date(today.getFullYear(),today.getMonth(),day);
+      const key=fmtDate(d);const isToday=day===today.getDate();
+      const isFuture=day>today.getDate();const isDone=data[key];
       return `<div class="hmdot ${isDone?'on':''} ${isToday?'today':''} ${isFuture?'future':''}"
-        ${isFuture?'':'onclick="toggleHabit(\''+h.id+'\',\''+key+'\')"'}
+        ${isFuture?'':' onclick="toggleHabit(\''+h.id+'\',\''+key+'\')"'}
         title="${day}">${day}</div>`;
     }).join('');
     return `<div class="habit-m-row">
@@ -777,31 +731,187 @@ function renderHabits(){
           <span style="font-size:16px;color:var(--text3);cursor:pointer" onclick="delHabit(${hi})">×</span>
         </div>
       </div>
-      <div class="progress-wrap progress-green"><div class="progress-fill pf-green" style="width:${pct}%"></div></div>
+      <div class="progress-wrap"><div class="progress-fill pf-green" style="width:${pct}%"></div></div>
       <div class="habit-m-days">${dots}</div>
     </div>`;
   }).join('');
 }
 
-function toggleHabit(hid,key){
-  const data=S('habit_'+hid)||{};
-  data[key]=!data[key];S('habit_'+hid,data);
-  renderHabits();updateStats();
-}
-function addHabit(){
-  const input=document.getElementById('habInput');
-  const name=input.value.trim();if(!name)return;
+function toggleHabit(hid,key){const data=S('habit_'+hid)||{};data[key]=!data[key];S('habit_'+hid,data);renderHabits();updateStats();}
+function addHabit(){const input=document.getElementById('habInput');const name=input.value.trim();if(!name)return;const habits=getHabits();habits.push({id:'h'+Date.now(),name,icon:'⭐'});S('habits',habits);input.value='';renderHabits();}
+function delHabit(i){const habits=getHabits();habits.splice(i,1);S('habits',habits);renderHabits();}
+
+// ── ANALYTICS ─────────────────────────────────────────────
+let _chartInstance=null;
+
+function initAnalytics(){
   const habits=getHabits();
-  habits.push({id:'h'+Date.now(),name,icon:'⭐'});
-  S('habits',habits);input.value='';renderHabits();
-}
-function delHabit(i){
-  const habits=getHabits();habits.splice(i,1);S('habits',habits);renderHabits();
+  const hSel=document.getElementById('aHabitSel');
+  hSel.innerHTML=habits.map(h=>`<option value="${h.id}">${h.icon} ${h.name}</option>`).join('');
+
+  const cSel=document.getElementById('aChartHabitSel');
+  cSel.innerHTML=`<option value="all">Все привычки</option>`+habits.map(h=>`<option value="${h.id}">${h.icon} ${h.name}</option>`).join('');
+
+  renderAnalytics();
+  renderChart();
 }
 
-// ── MODAL ────────────────────────────────────────────────
+function getHeatmapDates(period){
+  const end=new Date(today);
+  const start=new Date(today);
+  if(period==='month'){start.setDate(1);}
+  else if(period==='3month'){start.setMonth(start.getMonth()-2);start.setDate(1);}
+  else if(period==='6month'){start.setMonth(start.getMonth()-5);start.setDate(1);}
+  else if(period==='year'){start.setFullYear(start.getFullYear()-1);start.setDate(start.getDate()+1);}
+  return {start,end};
+}
+
+function renderAnalytics(){
+  const habitId=document.getElementById('aHabitSel').value;
+  const period=document.getElementById('aPeriodSel').value;
+  const data=S('habit_'+habitId)||{};
+  const {start,end}=getHeatmapDates(period);
+  const habits=getHabits();
+  const habit=habits.find(h=>h.id===habitId);
+
+  // Build heatmap by weeks
+  // Align start to Monday
+  const alignedStart=new Date(start);
+  const dow=alignedStart.getDay()===0?6:alignedStart.getDay()-1;
+  alignedStart.setDate(alignedStart.getDate()-dow);
+
+  const LEVELS=['#1e1e23','#1a4a35','#1d7a55','#1d9e75','#26c98d'];
+
+  const weeks=[];
+  let cur=new Date(alignedStart);
+  while(cur<=end){
+    const week=[];
+    for(let i=0;i<7;i++){
+      const d=new Date(cur);
+      const key=fmtDate(d);
+      const inRange=d>=start&&d<=end;
+      const isFuture=d>today;
+      week.push({date:d,key,done:!isFuture&&inRange?(data[key]||false):null,inRange,isFuture});
+      cur.setDate(cur.getDate()+1);
+    }
+    weeks.push(week);
+  }
+
+  const grid=document.getElementById('heatmapGrid');
+  // Show month labels above columns
+  let html='';
+  weeks.forEach((week,wi)=>{
+    const firstInRange=week.find(d=>d.inRange&&!d.isFuture);
+    const monthLabel=(wi===0||week[0].date.getDate()<=7)?MONTHS[week[0].date.getMonth()].slice(0,3):'';
+    html+=`<div class="hm-col">`;
+    html+=`<div class="hm-month-label" style="height:16px;font-size:9px;color:var(--text3)">${monthLabel}</div>`;
+    week.forEach(cell=>{
+      let bg='var(--surface3)';
+      if(cell.done===true)bg=LEVELS[4];
+      else if(cell.done===false&&cell.inRange)bg=LEVELS[1];
+      else if(!cell.inRange)bg='transparent';
+      const border=fmtDate(cell.date)===todayKey?'border:1.5px solid var(--accent);':'';
+      const title=cell.inRange&&!cell.isFuture?`${cell.date.getDate()} ${MONTHS_GEN[cell.date.getMonth()]}: ${cell.done?'✓ выполнено':'✗ пропущено'}`:'';
+      html+=`<div class="hm-cell" style="background:${bg};${border}" title="${title}"></div>`;
+    });
+    html+=`</div>`;
+  });
+  grid.innerHTML=html;
+}
+
+function renderChart(){
+  const habitId=document.getElementById('aChartHabitSel').value;
+  const period=document.getElementById('aChartPeriod').value;
+  const habits=getHabits();
+
+  // Build date range
+  const end=new Date(today);
+  const start=new Date(today);
+  let groupBy='day';
+  if(period==='week'){start.setDate(start.getDate()-6);}
+  else if(period==='month'){start.setDate(1);groupBy='day';}
+  else if(period==='3month'){start.setMonth(start.getMonth()-2);start.setDate(1);groupBy='week';}
+
+  // Collect dates
+  const dates=[];
+  const cur=new Date(start);
+  while(cur<=end){dates.push(fmtDate(cur));cur.setDate(cur.getDate()+1);}
+
+  // Group by week if needed
+  let labels=[];let datasets=[];
+  const targetHabits=habitId==='all'?habits:habits.filter(h=>h.id===habitId);
+  const COLORS=['#7f77dd','#1d9e75','#378add','#ef9f27','#d4537e','#d85a30'];
+
+  if(groupBy==='day'){
+    labels=dates.map(k=>{const d=new Date(k);return d.getDate()+' '+MONTHS_GEN[d.getMonth()].slice(0,3);});
+    datasets=targetHabits.map((h,hi)=>{
+      const data2=S('habit_'+h.id)||{};
+      return {label:h.name,color:COLORS[hi%COLORS.length],values:dates.map(k=>data2[k]?1:0)};
+    });
+  } else {
+    // Group into weeks
+    const weeks={};
+    dates.forEach(k=>{
+      const d=new Date(k);const dow=d.getDay()===0?6:d.getDay()-1;
+      const mon=new Date(d);mon.setDate(d.getDate()-dow);const wk=fmtDate(mon);
+      if(!weeks[wk])weeks[wk]=[];weeks[wk].push(k);
+    });
+    const weekKeys=Object.keys(weeks).sort();
+    labels=weekKeys.map(wk=>{const d=new Date(wk);return d.getDate()+' '+MONTHS_GEN[d.getMonth()].slice(0,3);});
+    datasets=targetHabits.map((h,hi)=>{
+      const data2=S('habit_'+h.id)||{};
+      return {label:h.name,color:COLORS[hi%COLORS.length],values:weekKeys.map(wk=>{const days=weeks[wk];const done=days.filter(k=>data2[k]).length;return Math.round(done/days.length*100);})};
+    });
+  }
+
+  // Draw on canvas
+  const canvas=document.getElementById('activityChart');
+  const ctx=canvas.getContext('2d');
+  const W=canvas.offsetWidth||800;const H=200;
+  canvas.width=W;canvas.height=H;
+  ctx.clearRect(0,0,W,H);
+
+  if(!labels.length||!datasets.length){ctx.fillStyle='#555';ctx.font='13px sans-serif';ctx.fillText('Нет данных',W/2-30,H/2);return;}
+
+  const PAD={top:10,right:20,bottom:30,left:30};
+  const cW=W-PAD.left-PAD.right;const cH=H-PAD.top-PAD.bottom;
+  const maxVal=groupBy==='week'?100:1;
+
+  // Grid lines
+  ctx.strokeStyle='rgba(255,255,255,0.05)';ctx.lineWidth=1;
+  for(let i=0;i<=4;i++){const y=PAD.top+cH*(1-i/4);ctx.beginPath();ctx.moveTo(PAD.left,y);ctx.lineTo(PAD.left+cW,y);ctx.stroke();}
+
+  // X labels
+  ctx.fillStyle='#4a4a55';ctx.font='10px sans-serif';ctx.textAlign='center';
+  const step=Math.max(1,Math.floor(labels.length/10));
+  labels.forEach((l,i)=>{if(i%step===0){const x=PAD.left+cW*(i/(labels.length-1||1));ctx.fillText(l,x,H-8);}});
+
+  // Lines
+  datasets.forEach(ds=>{
+    if(!ds.values.length)return;
+    ctx.strokeStyle=ds.color;ctx.lineWidth=2;ctx.beginPath();
+    ds.values.forEach((v,i)=>{
+      const x=PAD.left+cW*(i/(labels.length-1||1));
+      const y=PAD.top+cH*(1-v/maxVal);
+      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    });
+    ctx.stroke();
+    // Dots
+    ctx.fillStyle=ds.color;
+    ds.values.forEach((v,i)=>{
+      const x=PAD.left+cW*(i/(labels.length-1||1));
+      const y=PAD.top+cH*(1-v/maxVal);
+      ctx.beginPath();ctx.arc(x,y,3,0,Math.PI*2);ctx.fill();
+    });
+  });
+
+  // Legend
+  document.getElementById('chartLegend').innerHTML=datasets.map(ds=>`
+    <div class="legend-item"><div class="legend-dot" style="background:${ds.color}"></div>${ds.label}</div>`).join('');
+}
+
+// ── MODAL ─────────────────────────────────────────────────
 let _modalMode=null,_modalKey=null;
-
 function openModal(mode,key){
   _modalMode=mode;_modalKey=key;
   document.getElementById('modalTitle').textContent=mode==='cal'?'Добавить событие':'Добавить задачу';
@@ -810,36 +920,28 @@ function openModal(mode,key){
   document.getElementById('modalBg').classList.add('open');
   setTimeout(()=>document.getElementById('modalTextInput').focus(),100);
 }
-function closeModal(){ document.getElementById('modalBg').classList.remove('open'); }
+function closeModal(){document.getElementById('modalBg').classList.remove('open');}
 function saveModal(){
   const text=document.getElementById('modalTextInput').value.trim();
-  const type=document.getElementById('modalStatusVal').value;
-  if(!text)return;
-  if(_modalMode==='week'){
-    const tasks=S('week_tasks_'+_modalKey)||[];
-    tasks.push({text,type,done:false});S('week_tasks_'+_modalKey,tasks);renderWeek();
-  } else if(_modalMode==='cal'){
-    const evs=S('cal_'+_modalKey)||[];
-    evs.push({text,type,done:false});S('cal_'+_modalKey,evs);renderCal();
-  }
+  const type=document.getElementById('modalStatusVal').value;if(!text)return;
+  if(_modalMode==='week'){const t=S('week_tasks_'+_modalKey)||[];t.push({text,type,done:false});S('week_tasks_'+_modalKey,t);renderWeek();}
+  else if(_modalMode==='cal'){const ev=S('cal_'+_modalKey)||[];ev.push({text,type,done:false});S('cal_'+_modalKey,ev);renderCal();}
   closeModal();
 }
 
-// ── INIT ─────────────────────────────────────────────────
+// ── INIT ──────────────────────────────────────────────────
 function init(){
-  const opts={weekday:'long',day:'numeric',month:'long'};
-  document.getElementById('navDate').textContent=today.toLocaleDateString('ru-RU',opts);
   document.getElementById('quoteBar').textContent=QUOTES[today.getDay()%QUOTES.length];
   buildStatusSelect('taskType');
+  renderDayNav();
   renderBlocks();
   renderTasks();
-  initNotes();
+  renderDayNotes();
   updateStats();
 }
 
-document.addEventListener('keydown',e=>{ if(e.key==='Escape')closeModal(); });
-document.getElementById('modalTextInput').addEventListener('keydown',e=>{ if(e.key==='Enter')saveModal(); });
-
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+document.getElementById('modalTextInput').addEventListener('keydown',e=>{if(e.key==='Enter')saveModal();});
 init();
 </script>
 </body>
